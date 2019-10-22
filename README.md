@@ -1,0 +1,3 @@
+# mobile-application-for-smart-order-system
+it contains code about user android mobile application to place order to resturant where smart order system is installed...
+for smart order system check out repository "Smart order system".
