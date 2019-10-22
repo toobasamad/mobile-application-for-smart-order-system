@@ -1,0 +1,107 @@
+package com.testing.www;
+
+import android.R;
+import android.net.Uri;
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+
+public class MainActivity extends Activity {
+ImageView Menu , ChkOut, close , Contactus, Feedback,History;
+Cursor cursor ;
+SQLiteDatabase db ;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		
+		super.onCreate(savedInstanceState);
+		setContentView(com.testing.www.R.layout.activity_main);
+		db = openOrCreateDatabase("CART",MODE_PRIVATE, null);
+		db.execSQL("CREATE TABLE IF NOT EXISTS IQRA(Deal VARCHAR,Quantity VARCHAR,Price VARCHAR,DATEnTIME VARCHAR)");
+		db.execSQL("CREATE TABLE IF NOT EXISTS BILL(DealName VARCHAR, Qty VARCHAR, Price VARCHAR)");
+		Menu = (ImageView) findViewById(com.testing.www.R.id.ivMenu);
+		ChkOut = (ImageView) findViewById(com.testing.www.R.id.ivOut);
+		close = (ImageView) findViewById(com.testing.www.R.id.IdivClose);
+		Contactus = (ImageView) findViewById(com.testing.www.R.id.ivContactus);
+		Feedback = (ImageView) findViewById(com.testing.www.R.id.IdivFeedback);
+		History = (ImageView) findViewById(com.testing.www.R.id.ivHistory);
+		ChkOut.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) 
+			{
+				Intent intent = new Intent(MainActivity.this, MyBill.class);
+				startActivity(intent);
+				
+			}
+		});
+		Menu.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(getApplicationContext(), HomePage.class);
+				startActivity(intent);
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		close.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(Intent.ACTION_MAIN);
+				intent.addCategory(Intent.CATEGORY_HOME);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+				
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		Contactus.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(Intent.ACTION_CALL);
+				intent.setData(Uri.parse("tel:03236549787"));
+				startActivity(intent);
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		Feedback.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:03236549787"));
+				startActivity(intent);
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		History.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, OrderHistory.class);
+				startActivity(intent);
+				//db.delete("IQRA", null, null);
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(com.testing.www.R.menu.main, menu);
+		return true;
+	}
+
+}
