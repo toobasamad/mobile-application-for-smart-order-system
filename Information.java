@@ -34,7 +34,7 @@ SQLiteDatabase db;
 ImageView btncart , btncancel; 
 int CurrQty , i = 0;
 String []All_Deals ;
-String name ;
+String name;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
